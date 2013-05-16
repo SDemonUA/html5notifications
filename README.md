@@ -7,5 +7,6 @@ Script will create Html5Notification object that will sutisfy http://www.w3.org/
 
 Supported browsers : 
 - Firefox 22+
+- Safari 6+ (on X Mountain Lion)
 - Chrome 22+
 
