@@ -8,7 +8,7 @@
 			options = options || {};
 			var n;
 			try {
-				n = napi.createNotification(options.iconUrl, title, options.body);
+				n = napi.createNotification(options.iconUrl || '', title, options.body || '');
 				n.__defineSetter__('onshow', function (callback) { this.ondisplay = callback; });
 				n.__defineGetter__('onshow', function () { return this.ondisplay; });
 				n.close = n.cancel;
