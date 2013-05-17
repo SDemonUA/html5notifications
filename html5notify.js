@@ -14,9 +14,13 @@
 				n.close = n.cancel;
 				n.show();
 			} catch (e) {
-				n = {};
+				n = {close : function () {}};
 				n.__defineSetter__('onerror', function (callback)) { if (typeof callback === 'function') callback.call(this); };
 			}
+			if (options.onclose) n.onclose = options.onclose;
+			if (options.onerror) n.onerror = options.onerror;
+			if (options.onshow) n.onshow = options.onshow;
+			if (options.onclick) n.onclick = options.onclick;
 			return n;
 		};
 		w.Html5Notification.__defineGetter__('permission', function () { return perms[napi.checkPermission()]; });
