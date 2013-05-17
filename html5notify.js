@@ -15,7 +15,7 @@
 				n.show();
 			} catch (e) {
 				n = {close : function () {}};
-				n.__defineSetter__('onerror', function (callback)) { if (typeof callback === 'function') callback.call(this); };
+				n.__defineSetter__('onerror', function (callback) { if (typeof callback === 'function') callback.call(this); });
 			}
 			if (options.onclose) n.onclose = options.onclose;
 			if (options.onerror) n.onerror = options.onerror;
