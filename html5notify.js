@@ -9,6 +9,8 @@
 			var n;
 			try {
 				n = napi.createNotification(options.icon || '', title, options.body || '');
+				n.dir = options.dir || 'auto';
+				n.tag = options.tag || '';
 				n.show();
 			} catch (e) {
 				n = {close : function () {}};
