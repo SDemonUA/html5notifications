@@ -8,27 +8,19 @@
 			options = options || {};
 			var n;
 			try {
-				n = napi.createNotification(options.iconUrl || '', title, options.body || '');
-				// Existing chrome implementation differs from chrome spec so...
-				// n.__defineSetter__('onshow', function (callback) { this.ondisplay = callback; });
-				// n.__defineGetter__('onshow', function () { return this.ondisplay; });
-				// n.close = n.cancel;
+				n = napi.createNotification(options.icon || '', title, options.body || '');
 				n.show();
 			} catch (e) {
 				n = {close : function () {}};
 				n.__defineSetter__('onerror', function (callback) { if (typeof callback === 'function') callback.call(this); });
 			}
-			if (options.onclose) n.onclose = options.onclose;
-			if (options.onerror) n.onerror = options.onerror;
-			if (options.onshow) n.onshow = options.onshow;
-			if (options.onclick) n.onclick = options.onclick;
 			return n;
 		};
 		w.Html5Notification.__defineGetter__('permission', function () { return perms[napi.checkPermission()]; });
 		w.Html5Notification.requestPermission = function (callback) { napi.requestPermission(function () {
 			if (typeof callback === 'function') callback.call(window, 'granted');
 		}); };
-	} else if (window.Notification) { // we can work with w3c working draft
+	} else if (window.Notification) { // we can work with w3c spec
 		w.Html5Notification = window.Notification;
 	} else { // web notifications not supported so let's make some dummy implementation
 		w.Html5Notification = function Html5Notification() {
