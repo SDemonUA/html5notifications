@@ -20,7 +20,7 @@
 		};
 		w.Html5Notification.__defineGetter__('permission', function () { return perms[napi.checkPermission()]; });
 		w.Html5Notification.requestPermission = function (callback) { napi.requestPermission(function () {
-			if (typeof callback === 'function') callback.call(window, 'granted');
+			if (typeof callback === 'function') callback.call(window, perms[napi.checkPermission()]);
 		}); };
 	} else if (window.Notification) { // we can work with w3c spec
 		w.Html5Notification = window.Notification;
